@@ -1,0 +1,22 @@
+<% dataset = data(@server_name) %>
+
+<script type='text/javascript' src='http://www.google.com/jsapi'></script>
+  <script type='text/javascript'>
+    google.load('visualization', '1', {'packages':['annotatedtimeline']});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'Time');
+      data.addColumn('number', 'All Players ');
+      data.addColumn('number', 'Alliance Players ');
+	  data.addColumn('number', 'Horde Players ');
+      data.addRows([
+        <% dataset.each do |d| %>
+			<%= d %><%= "," unless d == dataset.last %>
+		<% end %>
+      ]);
+
+      var chart = new google.visualization.AnnotatedTimeLine(document.getElementById('<%= @server_name %>_chart'));
+      chart.draw(data, {displayAnnotations: true, dateFormat: 'HH:mm MM dd, yyyy'});
+    }
+</script>
