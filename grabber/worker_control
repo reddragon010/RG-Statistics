@@ -3,4 +3,4 @@
 require 'rubygems'
 require 'daemons'
 
-Daemons.run('worker.rb')
+Daemons.run('worker.rb',{:app_name => ARGV[2],:dir_mode => :script, :dir => 'worker', :backtrace => true, :log_output => true})

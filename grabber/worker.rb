@@ -30,3 +30,5 @@ class Worker
   
 end
 
+server = Grabber::Server.find_by_name(ARGV)
+Worker.new(server).start
